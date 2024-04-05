@@ -1,25 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import Content from './Content'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+      <div className={"ExampleStyle"}>
+
+        <Content/>
+
+      </div>
+
   );
 }
 
 export default App;
+
+
+// All the development should go through Content.js, which is imported in-here later.
+// Use App.css for styles management. There's an ExampleStyle.
+
+
