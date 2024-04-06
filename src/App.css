@@ -1,12 +1,12 @@
-.enemyCardsHand {
+.hand {
   scale: 0.2;
 
   /*change this*/
-  margin-top: -2000px;
+  margin-top: -500px;
   margin-left: -300px;
 
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
 }

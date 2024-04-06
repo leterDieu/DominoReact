@@ -1,5 +1,4 @@
 import './App.css';
-// import Content from './Content'
 import {useState} from "react";
 
 
@@ -18,8 +17,8 @@ const cardImages = [
     {"src": "./img/example-card-12.png"},
 ]
 
-const manage_playerHandCards = []
-const manage_enemyHandCards = []
+let manage_playerHandCards = []
+let manage_enemyHandCards = []
 
 
 function App() {
@@ -37,21 +36,27 @@ function App() {
         setCards(shuffledCards)
         setPlayerHandCards([])
         setEnemyHandCards([])
+        manage_playerHandCards = []
+        manage_enemyHandCards = []
         // setTurns(0)
     }
 
     const drawCards = () => {
-        const randomCard_1 = Math.floor(Math.random() * cards.length)
-        manage_playerHandCards.push(cards[randomCard_1])
+        let manage_cards = [...cards]
 
-        const randomCard_2 = Math.floor(Math.random() * cards.length)
+        const randomCard_1 = Math.floor(Math.random() * manage_cards.length)
+        manage_playerHandCards.push(cards[randomCard_1])
+        manage_cards.splice(randomCard_1, 1)
+
+        const randomCard_2 = Math.floor(Math.random() * manage_cards.length)
         manage_enemyHandCards.push(cards[randomCard_2])
+        manage_cards.splice(randomCard_2, 1)
 
         setPlayerHandCards(manage_playerHandCards)
         setEnemyHandCards(manage_enemyHandCards)
+        setCards(manage_cards)
     }
 
-    console.log(cards, playerHandCards, enemyHandCards, manage_playerHandCards, manage_enemyHandCards)
 
     return (
         <div className="App">
@@ -60,37 +65,49 @@ function App() {
 
             <button onClick={drawCards}>Draw Cards</button>
 
-            <div className="enemyCardsHand">
-                {cards.map(card => (
-                    <div className="card" key={card.id}>
-                        <div>
-                            <img className="front" src={require(`${card.src}`)} alt="card front"/>
-                            <img className="back" src={require("./img/card-cover.png")} alt="card back"/>
+            <div className="allCards">
+
+                <p>Enemy's hand</p>
+
+                <div className="hand">
+                    {enemyHandCards.map(card => (
+                        <div className="card" key={card.id}>
+                            <div>
+                                <img className="front" src={require(`${card.src}`)} alt="card front"/>
+                                <img className="back" src={require("./img/card-cover.png")} alt="card back"/>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+
+                {/*<div className="enemyCardsGrid">*/}
+
+                {/*</div>*/}
+
+
+                {/*<div className="deck">*/}
+
+                {/*</div>*/}
+
+
+                {/*<div className="playerCardsGrid">*/}
+
+                {/*</div>*/}
+
+                <p>Player's hand:</p>
+
+                <div className="hand">
+                    {playerHandCards.map(card => (
+                        <div className="card" key={card.id}>
+                            <div>
+                                <img className="front" src={require(`${card.src}`)} alt="card front"/>
+                                <img className="back" src={require("./img/card-cover.png")} alt="card back"/>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
             </div>
-
-            {/*<div className="enemyCardsGrid">*/}
-
-            {/*</div>*/}
-
-
-            {/*<div className="deck">*/}
-
-            {/*</div>*/}
-
-
-            {/*<div className="playerCardsGrid">*/}
-
-            {/*</div>*/}
-
-            {/*<div className="playerCardsHand">*/}
-
-            {/*</div>*/}
-
-
-            {/*<Content/>*/}
 
         </div>
     );
