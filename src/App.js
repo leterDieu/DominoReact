@@ -9,6 +9,7 @@ import SingleEnemyHandCard from "./SingleEnemyHandCard";
 
 const cardImages = [{"src": "./img/example-card-1.png"}, {"src": "./img/example-card-2.png"}, {"src": "./img/example-card-3.png"}, {"src": "./img/example-card-4.png"}, {"src": "./img/example-card-5.png"}, {"src": "./img/example-card-6.png"}, {"src": "./img/example-card-7.png"}, {"src": "./img/example-card-8.png"}, {"src": "./img/example-card-9.png"}, {"src": "./img/example-card-10.png"}, {"src": "./img/example-card-11.png"}, {"src": "./img/example-card-12.png"},]
 
+
 let manage_playerHandCards = []
 let manage_enemyHandCards = []
 let manage_playerTableCards = []
@@ -40,7 +41,7 @@ function App() {
         // setTurns(0)
     }
 
-    const drawPlayerCards = () => {
+    const drawPlayerCards = () => { // ограничение на ману и количество карт
         let manage_cards = [...cards]
 
         const randomCard = Math.floor(Math.random() * manage_cards.length)
