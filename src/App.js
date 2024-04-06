@@ -17,8 +17,8 @@ const cardImages = [
     {"src": "./img/example-card-12.png"},
 ]
 
-let manage_playerHandCards = []
-let manage_enemyHandCards = []
+let manage_playerHandCards = [] // rebuild on table-class
+let manage_enemyHandCards = [] // rebuild on table-class
 
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
         // setTurns(0)
     }
 
-    const drawPlayerCards = () => {
+    const drawPlayerCards = () => { // ограничение на ману и количество карт
         let manage_cards = [...cards]
 
         const randomCard = Math.floor(Math.random() * manage_cards.length)
