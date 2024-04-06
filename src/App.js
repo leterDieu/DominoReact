@@ -41,18 +41,24 @@ function App() {
         // setTurns(0)
     }
 
-    const drawCards = () => {
+    const drawPlayerCards = () => {
         let manage_cards = [...cards]
 
-        const randomCard_1 = Math.floor(Math.random() * manage_cards.length)
-        manage_playerHandCards.push(cards[randomCard_1])
-        manage_cards.splice(randomCard_1, 1)
-
-        const randomCard_2 = Math.floor(Math.random() * manage_cards.length)
-        manage_enemyHandCards.push(cards[randomCard_2])
-        manage_cards.splice(randomCard_2, 1)
+        const randomCard = Math.floor(Math.random() * manage_cards.length)
+        manage_playerHandCards.push(cards[randomCard])
+        manage_cards.splice(randomCard, 1)
 
         setPlayerHandCards(manage_playerHandCards)
+        setCards(manage_cards)
+    }
+
+    const drawEnemyCards = () => {
+        let manage_cards = [...cards]
+
+        const randomCard = Math.floor(Math.random() * manage_cards.length)
+        manage_enemyHandCards.push(cards[randomCard])
+        manage_cards.splice(randomCard, 1)
+
         setEnemyHandCards(manage_enemyHandCards)
         setCards(manage_cards)
     }
@@ -63,7 +69,9 @@ function App() {
 
             <button onClick={shuffleCards}>Reset</button>
 
-            <button onClick={drawCards}>Draw Cards</button>
+            <button onClick={drawPlayerCards}>Draw Player Cards</button>
+
+            <button onClick={drawEnemyCards}>Draw Enemy Cards</button> {/*proof of concept*/}
 
             <div className="allCards">
 
