@@ -1,4 +1,43 @@
-.hand {
+.enemy-hand {
+  scale: 0.2;
+
+  /*change this*/
+  margin-top: -500px;
+  margin-left: -300px;
+
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.player-hand {
+  scale: 0.2;
+
+  /*change this*/
+  margin-top: -500px;
+  margin-left: -300px;
+
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.player-table {
+  scale: 0.2;
+
+  /*change this*/
+  margin-top: -500px;
+  margin-left: -300px;
+
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.enemy-table {
   scale: 0.2;
 
   /*change this*/

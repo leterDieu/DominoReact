@@ -1,5 +1,10 @@
 import './App.css';
 import {useState} from "react";
+import SinglePlayerHandCard from "./SinglePlayerHandCard";
+import SinglePlayerTableCard from "./SinglePlayerTableCard";
+import SingleEnemyTableCard from "./SingleEnemyTableCard";
+import SingleEnemyHandCard from "./SingleEnemyHandCard";
+import {tab} from "@testing-library/user-event/dist/tab";
 
 
 const cardImages = [
@@ -19,6 +24,8 @@ const cardImages = [
 
 let manage_playerHandCards = []
 let manage_enemyHandCards = []
+let manage_playerTableCards = []
+let manage_enemyTableCards = []
 
 
 function App() {
@@ -26,12 +33,17 @@ function App() {
     const [playerHandCards, setPlayerHandCards] = useState([])
     const [enemyHandCards, setEnemyHandCards] = useState([])
     // const [turns, setTurns] = useState(0)
+    const [playerTableCards, setPlayerTableCards] = useState([])
+    const [enemyTableCards, setEnemyTableCards] = useState([])
+
+    const [tableChoice1, setTableChoice1] = useState(null)
+    const [tableChoice2, setTableChoice2] = useState(null)
+
 
     // shuffle cards + id and reset turns
     const shuffleCards = () => {
         const shuffledCards = [...cardImages]
             .sort(() => Math.random() - 0.5)
-            .map((card) => ({ ...card, id: Math.random()}))
 
         setCards(shuffledCards)
         setPlayerHandCards([])
@@ -46,7 +58,8 @@ function App() {
 
         const randomCard = Math.floor(Math.random() * manage_cards.length)
         manage_playerHandCards.push(cards[randomCard])
-        manage_cards.splice(randomCard, 1)
+        manage_playerHandCards.map((card) => ({ ...card, id: Math.random()}))
+        // manage_cards.splice(randomCard, 1)
 
         setPlayerHandCards(manage_playerHandCards)
         setCards(manage_cards)
@@ -57,12 +70,47 @@ function App() {
 
         const randomCard = Math.floor(Math.random() * manage_cards.length)
         manage_enemyHandCards.push(cards[randomCard])
-        manage_cards.splice(randomCard, 1)
+        manage_enemyHandCards.map((card) => ({ ...card, id: Math.random()}))
+        // manage_cards.splice(randomCard, 1)
 
         setEnemyHandCards(manage_enemyHandCards)
         setCards(manage_cards)
     }
 
+    const handleHandClick = (card) => {
+        let manage_HandCards = [...playerHandCards]
+
+        manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
+        manage_playerTableCards.push(card)
+        manage_playerHandCards.splice(manage_HandCards.indexOf(card), 1)
+
+        setPlayerHandCards(manage_HandCards)
+        setPlayerTableCards(manage_playerTableCards)
+    }
+
+    const handleHandBot = (card) => {
+        let manage_HandCards = [...enemyHandCards]
+
+        manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
+        manage_enemyTableCards.push(card)
+        manage_enemyHandCards.splice(manage_HandCards.indexOf(card), 1)
+
+        setEnemyHandCards(manage_HandCards)
+        setEnemyTableCards(manage_enemyTableCards)
+    }
+
+    const handleTableClickOwn = (card) => {
+        setTableChoice1(card)
+    }
+
+    const handleTableClickOther = (card) => {
+        tableChoice1 ? setTableChoice2(card) : setTableChoice1(null)
+
+        console.log(tableChoice1)
+        console.log(tableChoice2)
+        // FUNCTION
+
+    }
 
     return (
         <div className="App">
@@ -77,41 +125,47 @@ function App() {
 
                 <p>Enemy's hand</p>
 
-                <div className="hand">
+                <div className="enemy-hand">
                     {enemyHandCards.map(card => (
-                        <div className="card" key={card.id}>
-                            <div>
-                                <img className="front" src={require(`${card.src}`)} alt="card front"/>
-                                <img className="back" src={require("./img/card-cover.png")} alt="card back"/>
-                            </div>
-                        </div>
+                        <SingleEnemyHandCard
+                        key={card.id}
+                        card={card}
+                        handleHandBot={handleHandBot}
+                        />
                     ))}
                 </div>
 
-                {/*<div className="enemyCardsGrid">*/}
+                <div className="enemy-table">
+                    {enemyTableCards.map(card => (
+                        <SingleEnemyTableCard
+                        key={card.id}
+                        card={card}
+                        handleTableClick2={handleTableClickOther}
+                        />
+                    ))}
+                </div>
 
-                {/*</div>*/}
+                <p>Player's table:</p>
 
-
-                {/*<div className="deck">*/}
-
-                {/*</div>*/}
-
-
-                {/*<div className="playerCardsGrid">*/}
-
-                {/*</div>*/}
+                <div className="player-table">
+                    {playerTableCards.map(card => (
+                        <SinglePlayerTableCard
+                        key={card.id}
+                        card={card}
+                        handleTableClick1={handleTableClickOwn}
+                        />
+                    ))}
+                </div>
 
                 <p>Player's hand:</p>
 
-                <div className="hand">
+                <div className="player-hand">
                     {playerHandCards.map(card => (
-                        <div className="card" key={card.id}>
-                            <div>
-                                <img className="front" src={require(`${card.src}`)} alt="card front"/>
-                                <img className="back" src={require("./img/card-cover.png")} alt="card back"/>
-                            </div>
-                        </div>
+                        <SinglePlayerHandCard
+                            key={card.id}
+                            card={card}
+                            handleHandClick={handleHandClick}
+                        />
                     ))}
                 </div>
 
