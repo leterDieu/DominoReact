@@ -4,16 +4,39 @@ import SinglePlayerHandCard from "./SinglePlayerHandCard";
 import SinglePlayerTableCard from "./SinglePlayerTableCard";
 import SingleEnemyTableCard from "./SingleEnemyTableCard";
 import SingleEnemyHandCard from "./SingleEnemyHandCard";
+// import {Prototype} from "./gameLogic/card.mjs";
 // import {tab} from "@testing-library/user-event/dist/tab";
 
 
-const cardImages = [{"src": "./img/example-card-1.png"}, {"src": "./img/example-card-2.png"}, {"src": "./img/example-card-3.png"}, {"src": "./img/example-card-4.png"}, {"src": "./img/example-card-5.png"}, {"src": "./img/example-card-6.png"}, {"src": "./img/example-card-7.png"}, {"src": "./img/example-card-8.png"}, {"src": "./img/example-card-9.png"}, {"src": "./img/example-card-10.png"}, {"src": "./img/example-card-11.png"}, {"src": "./img/example-card-12.png"},]
+const cardImages = [
+    {"src": "./img/example-card-1.png"},
+    {"src": "./img/example-card-2.png"},
+    {"src": "./img/example-card-3.png"},
+    {"src": "./img/example-card-4.png"},
+    {"src": "./img/example-card-5.png"},
+    {"src": "./img/example-card-6.png"},
+    {"src": "./img/example-card-7.png"},
+    {"src": "./img/example-card-8.png"},
+    {"src": "./img/example-card-9.png"},
+    {"src": "./img/example-card-10.png"},
+    {"src": "./img/example-card-11.png"},
+    {"src": "./img/example-card-12.png"},
+]
+
+// const cardRenew = [
+//     {"name": "Prototype"}
+// ]
 
 
 let manage_playerHandCards = []
 let manage_enemyHandCards = []
 let manage_playerTableCards = []
 let manage_enemyTableCards = []
+
+// function createClassByName(name,...a) {
+//     let c = eval(name);
+//     return new c(...a);
+// }
 
 
 function App() {
@@ -25,7 +48,7 @@ function App() {
     const [enemyTableCards, setEnemyTableCards] = useState([])
 
     const [tableChoice1, setTableChoice1] = useState(null)
-    const [tableChoice2, setTableChoice2] = useState(null)
+    // const [tableChoice2, setTableChoice2] = useState(null)
 
 
     // shuffle cards + id and reset turns
@@ -36,6 +59,8 @@ function App() {
         setCards(shuffledCards)
         setPlayerHandCards([])
         setEnemyHandCards([])
+        setEnemyTableCards([])
+        setPlayerTableCards([])
         manage_playerHandCards = []
         manage_enemyHandCards = []
         // setTurns(0)
@@ -45,7 +70,8 @@ function App() {
         let manage_cards = [...cards]
 
         const randomCard = Math.floor(Math.random() * manage_cards.length)
-        manage_playerHandCards.push(cards[randomCard])
+        let newCard = cards[randomCard] //createClassByName(cards[randomCard].name)
+        manage_playerHandCards.push(newCard)
         manage_playerHandCards.map((card) => ({...card, id: Math.random()}))
         // manage_cards.splice(randomCard, 1)
 
@@ -57,7 +83,8 @@ function App() {
         let manage_cards = [...cards]
 
         const randomCard = Math.floor(Math.random() * manage_cards.length)
-        manage_enemyHandCards.push(cards[randomCard])
+        let newCard = cards[randomCard] //createClassByName([randomCard].name)
+        manage_enemyHandCards.push(newCard)
         manage_enemyHandCards.map((card) => ({...card, id: Math.random()}))
         // manage_cards.splice(randomCard, 1)
 
@@ -92,12 +119,13 @@ function App() {
     }
 
     const handleTableClickOther = (card) => {
-        tableChoice1 ? setTableChoice2(card) : setTableChoice1(null)
+        if (tableChoice1 !== null) {
+            console.log(tableChoice1)
+            console.log(card)
+            // FUNCTION
 
-        console.log(tableChoice1)
-        console.log(tableChoice2)
-        // FUNCTION
-
+            setTableChoice1(null)
+        }
     }
 
     return (<div className="App">
@@ -111,7 +139,7 @@ function App() {
 
             <div className="allCards">
 
-                <p>Enemy's hand</p>
+                <p>Enemy's hand:</p>
 
                 <div className="enemy-hand">
                     {enemyHandCards.map(card => (<SingleEnemyHandCard
@@ -120,6 +148,8 @@ function App() {
                             handleHandBot={handleHandBot}
                         />))}
                 </div>
+
+                <p>Enemy's table:</p>
 
                 <div className="enemy-table">
                     {enemyTableCards.map(card => (<SingleEnemyTableCard

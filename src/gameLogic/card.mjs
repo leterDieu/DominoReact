@@ -39,7 +39,7 @@ class Card {
 
 class Prototype extends Card {
     constructor() {
-        super("prot", 3, 3, 1, [], "");
+        super("prot", 3, 3, 1, [], "./img/proto.png");
     }
 
     router(type, this_table=null, impacted_card_id=null, impacted_table=null) {

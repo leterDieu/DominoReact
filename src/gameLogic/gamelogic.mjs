@@ -1,4 +1,4 @@
-import {tab} from "@testing-library/user-event/dist/tab";
+// import {tab} from "@testing-library/user-event/dist/tab";
 
 function attack(attackerCardId, defenderCardId, attackerTable, defenderTable) { // 0 - success; 1 - error
     let attacker = attackerTable[attackerCardId]
