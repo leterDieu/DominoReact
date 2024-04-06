@@ -1,11 +1,10 @@
-export default function SingleEnemyHandCard({ card, handleHandBot }) {
+export default function SingleEnemyHandCard({card, handleHandBot}) {
 
     const handleClick = () => {
         handleHandBot(card)
     }
 
-    return (
-        <div className="card">
+    return (<div className="card">
             <div>
                 <img className="front"
                      src={require(`${card.src}`)}
@@ -18,6 +17,5 @@ export default function SingleEnemyHandCard({ card, handleHandBot }) {
                     alt="card back"
                 />
             </div>
-        </div>
-    )
+        </div>)
 }

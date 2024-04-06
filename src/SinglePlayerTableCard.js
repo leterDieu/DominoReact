@@ -1,11 +1,10 @@
-export default function SinglePlayerTableCard({ card, handleTableClick1 }) {
+export default function SinglePlayerTableCard({card, handleTableClick1}) {
 
     const handleClick = () => {
         handleTableClick1(card)
     }
 
-    return (
-        <div className="card">
+    return (<div className="card">
             <div>
                 <img className="front"
                      src={require(`${card.src}`)}
@@ -18,6 +17,5 @@ export default function SinglePlayerTableCard({ card, handleTableClick1 }) {
                     alt="card back"
                 />
             </div>
-        </div>
-    )
+        </div>)
 }

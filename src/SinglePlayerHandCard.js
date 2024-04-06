@@ -1,11 +1,10 @@
-export default function SinglePlayerHandCard({ card, handleHandClick }) {
+export default function SinglePlayerHandCard({card, handleHandClick}) {
 
     const handleClick = () => {
         handleHandClick(card)
     }
 
-    return (
-        <div className="card">
+    return (<div className="card">
             <div>
                 <img className="front"
                      src={require(`${card.src}`)}
@@ -18,6 +17,5 @@ export default function SinglePlayerHandCard({ card, handleHandClick }) {
                     alt="card back"
                 />
             </div>
-        </div>
-    )
+        </div>)
 }
