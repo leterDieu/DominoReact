@@ -1,9 +1,6 @@
-function attack(attackerCardId, defenderCardId, attackerTable, defenderTable) { // 0 - success; 1 - error
-    let attacker = attackerTable[attackerCardId]
-    let defender = defenderTable[defenderCardId]
-
-    attacker.router("atk", [attackerTable, defenderCardId, defenderTable])
-    defender.router("def", [defenderTable, attackerCardId, attackerTable])
+function attack(attacker, defender, attackerTable, defenderTable) { // 0 - success; 1 - error
+    attacker.router("atk", [attackerTable, defender, defenderTable])
+    defender.router("def", [defenderTable, attacker, attackerTable])
 
     defender.getDamage(attacker.atk)
 }
