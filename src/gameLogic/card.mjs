@@ -24,7 +24,7 @@ class Card {
 
 class Prototype extends Card {
     constructor() {
-        super("prot", 3, 3, 1, [], "./img/example-card-1.png");
+        super("prot", 3, 3, 1, [], "./img/Boriska.webp");
     }
 
     router(type, this_table=null, impacted_card_id=null, impacted_table=null) {

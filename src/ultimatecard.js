@@ -1,3 +1,4 @@
+import './App.css'
 export default function UltimateCard(props) {
     const recieved_func = props.func
     const card = props.card
@@ -6,17 +7,19 @@ export default function UltimateCard(props) {
         recieved_func(card)
     }
 
-    return (<div className="card">
+    return (
+
         <div>
-            <img className="front"
+        <div>
+            <img className="card"
                  src={require(`${card.src}`)}
                  alt="card front"
                  onClick={handleClick}
             />
-            <img className="back"
-                src={require("./img/card-cover.png")}
-                alt="card back"
-            />
+
+
+            <div className="hp_num">{card.hp}</div>
+            <div className="atk_num">{card.atk}</div>
         </div>
     </div>)
 }
