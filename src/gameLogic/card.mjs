@@ -1,6 +1,7 @@
 class Card {
     constructor(name, hp, atk, cst, conditions, src) {
         this.name = name // имя карты; используется, чтобы опознать класс карты
+        this.id = Math.random() // id карты, чтобы отделять объекты html
         this.atk = atk
         this.hp = hp
         this.cst = cst

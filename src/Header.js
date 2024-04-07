@@ -20,10 +20,11 @@ const Header = (props) => {
         let copied_deck = [...deck]
         let copied_hand = [...handGetter]
         if (copied_hand.length === 8) {
-            alert("tou have reached maximum of cards in your hand")
+            alert("you have reached maximum of cards in your hand")
             return 1
         }
 
+        // copied_deck.map((card) => ({...card, id: Math.random()}))
         copied_hand.push(new copied_deck[randint(copied_deck.length)]())
         handSetter(copied_hand)
         console.log(copied_hand)
