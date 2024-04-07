@@ -5,7 +5,7 @@ import {basic_deck} from "./gameLogic/deckcreator.mjs";
 import UltimateCard from "./ultimatecard";
 
 
-    // const cardImages = [{"src": "./img/example-card-1.png"}, {"src": "./img/example-card-2.png"}, {"src": "./img/example-card-3.png"}, {"src": "./img/example-card-4.png"}, {"src": "./img/example-card-5.png"}, {"src": "./img/example-card-6.png"}, {"src": "./img/example-card-7.png"}, {"src": "./img/example-card-8.png"}, {"src": "./img/example-card-9.png"}, {"src": "./img/example-card-10.png"}, {"src": "./img/example-card-11.png"}, {"src": "./img/example-card-12.png"},]
+// const cardImages = [{"src": "./img/example-card-1.png"}, {"src": "./img/example-card-2.png"}, {"src": "./img/example-card-3.png"}, {"src": "./img/example-card-4.png"}, {"src": "./img/example-card-5.png"}, {"src": "./img/example-card-6.png"}, {"src": "./img/example-card-7.png"}, {"src": "./img/example-card-8.png"}, {"src": "./img/example-card-9.png"}, {"src": "./img/example-card-10.png"}, {"src": "./img/example-card-11.png"}, {"src": "./img/example-card-12.png"},]
 const deck = basic_deck
 
 
@@ -25,20 +25,24 @@ function App() {
     const [tableChoice2, setTableChoice2] = useState(null)
 
     const allData = {
-                        decks: deckedCards,
-                        setters: {
-                            player: {hand: setPlayerHandCards, table: setPlayerTableCards},
-                            enemy: {hand: setEnemyHandCards, table: setEnemyTableCards}
-                        },
-                        getters: {
-                            player: {hand: playerHandCards, table: playerTableCards},
-                            enemy: {hand: enemyHandCards, table: enemyTableCards}
-                        }
+        decks: deckedCards,
+        setters: {
+            player: {hand: setPlayerHandCards, table: setPlayerTableCards},
+            enemy: {hand: setEnemyHandCards, table: setEnemyTableCards}
+        },
+        getters: {
+            player: {hand: playerHandCards, table: playerTableCards},
+            enemy: {hand: enemyHandCards, table: enemyTableCards}
+        }
     }
     // will be used as keyed collection for Header and other
 
 
-    const handleHandClick = (card ) => {
+    const handleHandClick = (card) => {
+        if (playerTableCards.length === 10) {
+            alert("you have reached maximum of cards on your table")
+            return 1
+        }
         let manage_HandCards = [...playerHandCards]
         let oldTable = [...playerTableCards]
 
@@ -46,9 +50,14 @@ function App() {
         manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
         setPlayerHandCards(manage_HandCards)
         setPlayerTableCards(oldTable)
+        return 0
     }
 
     const handleHandBot = (card) => {
+        if (enemyTableCards.length === 10) {
+            alert("enemy have reached maximum of cards on his table")
+            return 1
+        }
         let manage_HandCards = [...enemyHandCards]
         let oldTable = [...enemyTableCards]
 
@@ -56,6 +65,7 @@ function App() {
         manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
         setEnemyHandCards(manage_HandCards)
         setEnemyTableCards(oldTable)
+        return 0
     }
 
     const handleTableClickOwn = (card) => {
@@ -80,13 +90,13 @@ function App() {
                 <p>Enemy's hand:</p>
 
                 <div className="enemy-hand">
-                    {enemyHandCards.map(card => (<UltimateCard card={card} func={handleHandBot} />))}
+                    {enemyHandCards.map(card => (<UltimateCard card={card} func={handleHandBot}/>))}
                 </div>
 
                 <p>Enemy's table:</p>
 
                 <div className="enemy-table">
-                    {enemyTableCards.map(card => (<UltimateCard card={card} func={handleTableClickOther} />))}
+                    {enemyTableCards.map(card => (<UltimateCard card={card} func={handleTableClickOther}/>))}
                 </div>
 
                 <p>Player's table:</p>

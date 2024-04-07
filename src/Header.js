@@ -20,7 +20,7 @@ const Header = (props) => {
         let copied_deck = [...deck]
         let copied_hand = [...handGetter]
         if (copied_hand.length === 8) {
-            alert("tou have reached maximum of cards in your hand")
+            alert("you have reached maximum of cards in your hand")
             return 1
         }
 
