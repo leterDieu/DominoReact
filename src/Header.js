@@ -27,7 +27,7 @@ const Header = (props) => {
         // copied_deck.map((card) => ({...card, id: Math.random()}))
         copied_hand.push(new copied_deck[randint(copied_deck.length)]())
         handSetter(copied_hand)
-        console.log(copied_hand)
+        // console.log(copied_hand)
         return 0
     }
 
