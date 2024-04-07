@@ -87,8 +87,12 @@ function App() {
     }
 
     const plusStage = () => {
-        if (gameData.stage === 1) {
-            //bot cards draw
+        if (gameData.stage === 0) {
+            // draw cards
+            gameData.stage++
+        }
+        else if (gameData.stage === 1) {
+            //bot cards picking
             gameData.stage++
         } else if (gameData.stage === 2) {
             //spells
