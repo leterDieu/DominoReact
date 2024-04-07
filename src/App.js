@@ -40,7 +40,7 @@ function App() {
 
     const handleHandClick = (card) => {
         if (playerTableCards.length === 10) {
-            alert("you have reached maximum of cards on your table")
+            alert("you have reached maximum of cards on your table.")
             return 1
         }
         let manage_HandCards = [...playerHandCards]
@@ -55,7 +55,7 @@ function App() {
 
     const handleHandBot = (card) => {
         if (enemyTableCards.length === 10) {
-            alert("enemy have reached maximum of cards on his table")
+            alert("enemy have reached maximum of cards on his table.")
             return 1
         }
         let manage_HandCards = [...enemyHandCards]
