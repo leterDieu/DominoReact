@@ -1,9 +1,14 @@
+import {useLayoutEffect, useRef} from "react";
+import {sleep} from "./gameLogic/gamelogic.mjs";
+import gsap from "gsap";
+
 export default function UltimateCard(props) {
     const recieved_func = props.func
     const card = props.card
-
+    const cardaRef = useRef(null);
     const handleClick = () => {
         recieved_func(card)
+
     }
 
     return (<div className="card">

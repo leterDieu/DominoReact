@@ -24,8 +24,12 @@ function checkHealth(table) {
     return toRemove
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 function randint(max) {
     return Math.floor(Math.random() * max)
 }
 
-export { attack, basicSpells, checkHealth, randint }
+export { attack, basicSpells, checkHealth, randint, sleep }
+

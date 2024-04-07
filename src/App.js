@@ -1,8 +1,11 @@
 import './App.css';
-import {useState} from "react";
+import {useLayoutEffect, useState} from "react";
 import Header from "./Header.js";
 import {basic_deck} from "./gameLogic/deckcreator.mjs";
 import UltimateCard from "./ultimatecard";
+import React from 'react';
+import gsap from "gsap";
+import {sleep} from "./gameLogic/gamelogic.mjs";
 
 
 // const cardImages = [{"src": "./img/example-card-1.png"}, {"src": "./img/example-card-2.png"}, {"src": "./img/example-card-3.png"}, {"src": "./img/example-card-4.png"}, {"src": "./img/example-card-5.png"}, {"src": "./img/example-card-6.png"}, {"src": "./img/example-card-7.png"}, {"src": "./img/example-card-8.png"}, {"src": "./img/example-card-9.png"}, {"src": "./img/example-card-10.png"}, {"src": "./img/example-card-11.png"}, {"src": "./img/example-card-12.png"},]
@@ -11,7 +14,9 @@ const deck = basic_deck
 
 // const GameData = {turn: 0, stage: 0, playerMana: 5, botMana: 5, playerManaPerTurn: 2, botManaPerTurn: 2};
 
+
 function App() {
+
     const [deckedCards] = useState(deck)
 
     const [playerHandCards, setPlayerHandCards] = useState([])

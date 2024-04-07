@@ -1,4 +1,5 @@
 import {randint} from "./gameLogic/gamelogic.mjs";
+import gsap from "gsap";
 
 const Header = (props) => {
     const deck = props.data.decks
