@@ -8,32 +8,39 @@ const Header = (props) => {
     const enemyHandGetter = props.data.getters.enemy.hand
     const playerTableSetter = props.data.setters.player.table
     const enemyTableSetter = props.data.setters.enemy.table
+    const stage = props.stage
 
     const resetFunc = (playerHandSetter, enemyHandSetter, playerTableSetter, enemyTableSetter) => {
         playerHandSetter([])
         playerTableSetter([])
         enemyTableSetter([])
         enemyHandSetter([])
+
+        // set stage to zero, set gameData to initial
     }
 
     const drawCards = (deck, handGetter, handSetter) => { // ограничение на ману и количество карт
-        let copied_deck = [...deck]
-        let copied_hand = [...handGetter]
-        if (copied_hand.length === 8) {
-            alert("you have reached maximum of cards in your hand")
-            return 1
-        }
+        if (stage === 0 || stage === -1) {
 
-        // copied_deck.map((card) => ({...card, id: Math.random()}))
-        copied_hand.push(new copied_deck[randint(copied_deck.length)]())
-        handSetter(copied_hand)
-        // console.log(copied_hand)
-        return 0
+            let copied_deck = [...deck]
+            let copied_hand = [...handGetter]
+
+            if (copied_hand.length === 8) {
+                alert("you have reached maximum of cards in your hand")
+                return 1
+            }
+
+            copied_hand.push(new copied_deck[randint(copied_deck.length)]())
+            handSetter(copied_hand)
+            return 0
+        }
     }
 
     return (
         <header className="game-header">
-            <button onClick={() => resetFunc(playerHandSetter, enemyHandSetter, playerTableSetter, enemyTableSetter)}>Reset</button>
+            <button
+                onClick={() => resetFunc(playerHandSetter, enemyHandSetter, playerTableSetter, enemyTableSetter)}>Reset
+            </button>
 
             <button onClick={() => drawCards(deck, playerHandGetter, playerHandSetter)}>DECK -> PLAYER HAND</button>
 
