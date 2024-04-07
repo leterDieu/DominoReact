@@ -11,7 +11,6 @@ const deck = basic_deck
 
 // const GameData = {turn: 0, stage: 0, playerMana: 5, botMana: 5, playerManaPerTurn: 2, botManaPerTurn: 2};
 
-
 function App() {
     const [deckedCards] = useState(deck)
 
@@ -35,6 +34,7 @@ function App() {
         }
     }
     // will be used as keyed collection for Header and other
+
 
     const handleHandClick = (card) => {
         let manage_HandCards = [...playerHandCards]
@@ -67,8 +67,6 @@ function App() {
             // FUNCTION
         }
 
-            setTableChoice1(null)
-        }
     }
 
     return (
@@ -112,4 +110,3 @@ function App() {
 }
 
 export default App;
-
