@@ -1,5 +1,3 @@
-// import {tab} from "@testing-library/user-event/dist/tab";
-
 function attack(attackerCardId, defenderCardId, attackerTable, defenderTable) { // 0 - success; 1 - error
     let attacker = attackerTable[attackerCardId]
     let defender = defenderTable[defenderCardId]
@@ -26,4 +24,8 @@ function checkHealth(table) {
     return toRemove
 }
 
-export { attack, basicSpells, checkHealth }
+function randint(max) {
+    return Math.floor(Math.random() * max)
+}
+
+export { attack, basicSpells, checkHealth, randint }

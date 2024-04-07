@@ -1,6 +1,7 @@
 class Card {
     constructor(name, hp, atk, cst, conditions, src) {
         this.name = name // имя карты; используется, чтобы опознать класс карты
+        this.id = Math.random() // id карты, чтобы отделять объекты html
         this.atk = atk
         this.hp = hp
         this.cst = cst
@@ -20,26 +21,11 @@ class Card {
     removeCondition(requiredCondition) {
         this.conditions.splice(this.conditions.indexOf(requiredCondition), 1)
     }
-
-    // [deprecated]
-    // router(type, [this_table, impacted_card_id, impacted_table], [basicSpells, attackSpells, defendSpells]) {
-    //     let chosen;
-    //     if (type === "basic") {
-    //         chosen = basicSpells;
-    //     } else if (type === "atk"){
-    //         chosen = attackSpells;
-    //     } else {
-    //         chosen = defendSpells;
-    //     }
-    //     for (let i = 0; i < chosen.length; i++) {
-    //         chosen[i](this_table, impacted_card_id, impacted_table)
-    //     }
-    // }
 }
 
 class Prototype extends Card {
     constructor() {
-        super("prot", 3, 3, 1, [], "./img/proto.png");
+        super("prot", 3, 3, 1, [], "./img/example-card-1.png");
     }
 
     router(type, this_table=null, impacted_card_id=null, impacted_table=null) {
