@@ -49,3 +49,22 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
 }
+
+.card{
+  width: 150vmin;
+  height: 157vmin;
+}
+
+.hp_num{
+  position: absolute;
+  top: 87.7%;
+  left: 24%;
+  font-size: 380%;
+}
+
+.atk_num{
+  position: absolute;
+  top: 87.7%;
+  left: 80%;
+  font-size: 380%;
+}

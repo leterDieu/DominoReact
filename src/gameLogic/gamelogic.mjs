@@ -1,8 +1,11 @@
 function attack(attacker, defender, attackerTable, defenderTable) { // 0 - success; 1 - error
-    attacker.router("atk", [attackerTable, defender, defenderTable])
-    defender.router("def", [defenderTable, attacker, attackerTable])
+    if (attacker.canAttackThisTurn === true) {
+        attacker.router("atk", [attackerTable, defender, defenderTable])
+        defender.router("def", [defenderTable, attacker, attackerTable])
 
-    defender.getDamage(attacker.atk)
+        defender.getDamage(attacker.atk)
+        attacker.canAttackThisTurn = false
+    }
 }
 
 function basicSpells(table) {
