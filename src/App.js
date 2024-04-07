@@ -3,6 +3,7 @@ import {useState} from "react";
 import Header from "./Header.js";
 import {basic_deck} from "./gameLogic/deckcreator.mjs";
 import UltimateCard from "./ultimatecard";
+import {attack} from "./gameLogic/gamelogic.mjs";
 
 
 // const cardImages = [{"src": "./img/example-card-1.png"}, {"src": "./img/example-card-2.png"}, {"src": "./img/example-card-3.png"}, {"src": "./img/example-card-4.png"}, {"src": "./img/example-card-5.png"}, {"src": "./img/example-card-6.png"}, {"src": "./img/example-card-7.png"}, {"src": "./img/example-card-8.png"}, {"src": "./img/example-card-9.png"}, {"src": "./img/example-card-10.png"}, {"src": "./img/example-card-11.png"}, {"src": "./img/example-card-12.png"},]
@@ -23,12 +24,10 @@ function App() {
     const [tableChoice1, setTableChoice1] = useState(null)
 
     const allData = {
-        decks: deckedCards,
-        setters: {
+        decks: deckedCards, setters: {
             player: {hand: setPlayerHandCards, table: setPlayerTableCards},
             enemy: {hand: setEnemyHandCards, table: setEnemyTableCards}
-        },
-        getters: {
+        }, getters: {
             player: {hand: playerHandCards, table: playerTableCards},
             enemy: {hand: enemyHandCards, table: enemyTableCards}
         }
@@ -64,13 +63,12 @@ function App() {
         if (tableChoice1 !== null) {
             console.log(tableChoice1)
             console.log(card)
-            // FUNCTION
-        }
 
+            attack(tableChoice1, card, allData.getters.player.table, allData.getters.enemy.table)
+        }
     }
 
-    return (
-        <div className="App">
+    return (<div className="App">
             <Header data={allData}/>
 
             <div className="allCards">
@@ -78,9 +76,7 @@ function App() {
                 <p>Enemy's hand:</p>
 
                 <div className="enemy-hand">
-                    {
-                        enemyHandCards.map(card => (<UltimateCard key={card.id} card={card} func={handleHandBot}/>
-                        ))}
+                    {enemyHandCards.map(card => (<UltimateCard key={card.id} card={card} func={handleHandBot}/>))}
                 </div>
 
                 <p>Enemy's table:</p>
@@ -105,8 +101,7 @@ function App() {
 
             </div>
 
-        </div>
-    );
+        </div>);
 }
 
 export default App;
