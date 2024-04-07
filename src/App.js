@@ -10,7 +10,7 @@ import {attack} from "./gameLogic/gamelogic.mjs";
 const deck = basic_deck
 
 
-const gameData = {turn: 0, stage: 0, playerMana: 5, botMana: 5, playerManaPerTurn: 2, botManaPerTurn: 2};
+const gameData = {turn: 0, stage: -1, playerMana: 5, botMana: 5, playerManaPerTurn: 2, botManaPerTurn: 2};
 // stages:
 // -1 - debug,
 // 0 - mana increase, cards drawing
@@ -123,7 +123,6 @@ function App() {
         <p>{stage}</p>
 
         <Header data={allData} stage={gameData.stage}/>
-
         <div className="allCards">
 
             <p>Enemy's hand:</p>

@@ -1,3 +1,3 @@
-import {Prototype} from "./card.mjs";
+import {Boris} from "./card.mjs";
 
-export const basic_deck = [Prototype]
+export const basic_deck = [Boris]

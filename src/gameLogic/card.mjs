@@ -1,3 +1,5 @@
+import {randint} from "./gamelogic.mjs";
+
 class Card {
     constructor(name, hp, atk, cst, conditions, src) {
         this.name = name // имя карты; используется, чтобы опознать класс карты
@@ -7,7 +9,7 @@ class Card {
         this.cst = cst
         this.conditions = conditions
         this.src = src
-        this.canAttackThisTurn = false
+        this.canAttackThisTurn = true
     }
 
     getDamage(value) {
@@ -23,14 +25,14 @@ class Card {
     }
 }
 
-class Prototype extends Card {
+class Boris extends Card {
     constructor() {
-        super("prot", 3, 3, 1, [], "./img/example-card-1.png");
+        super("boris", 3, 2, 4, [], "./img/Boriska.webp");
     }
 
     router(type, this_table=null, impacted_card_id=null, impacted_table=null) {
         if (type === "basic") {
-            this.standingAlone(this_table)
+
         } else if (type === "atk") {
 
         } else {
@@ -38,12 +40,24 @@ class Prototype extends Card {
         }
     }
 
-    standingAlone(table) {
-        if (!this.checkConditions("standing alone") && table.length === 1) {
-            this.hp += 10
-            this.conditions.push("standing alone")
+    borisExcellent(this_table) {
+        if (this.checkConditions("boris the excellent")){
+            return;
+        }
+        for (let i = 0; i < this_table.length; i++){
+            if (this_table[i].name === 'nkvadrat') {
+                let chance = randint(100)
+                if (chance < 70) {
+                    this.hp += 2
+                } else {
+                    this.hp -= 2
+                    this.atk -= 1
+                }
+                this.conditions.push("boris the excellent")
+                return;
+            }
         }
     }
 }
 
-export { Prototype }
+export { Boris }
