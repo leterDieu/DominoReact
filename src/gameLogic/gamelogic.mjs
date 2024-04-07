@@ -24,4 +24,8 @@ function checkHealth(table) {
     return toRemove
 }
 
-export { attack, basicSpells, checkHealth }
+function randint(max) {
+    return Math.floor(Math.random() * max)
+}
+
+export { attack, basicSpells, checkHealth, randint }
