@@ -1,70 +1,30 @@
-.enemy-hand {
-  scale: 0.2;
+.stdBlock {
+  scale: 1;
 
   /*change this*/
-  margin-top: -500px;
-  margin-left: -300px;
-
+  margin-top: -200px;
+  margin-left: -50px;
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
 }
 
-.player-hand {
-  scale: 0.2;
-
-  /*change this*/
-  margin-top: -500px;
-  margin-left: -300px;
-
-
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
-}
-
-.player-table {
-  scale: 0.2;
-
-  /*change this*/
-  margin-top: -500px;
-  margin-left: -300px;
-
-
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
-}
-
-.enemy-table {
-  scale: 0.2;
-
-  /*change this*/
-  margin-top: -500px;
-  margin-left: -300px;
-
-
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
-}
-
-.card{
+.cardBlock{
   width: 150vmin;
   height: 157vmin;
 }
 
 .hp_num{
-  position: absolute;
-  top: 87.7%;
-  left: 24%;
-  font-size: 380%;
+  position: relative;
+  top: -19vmin;
+  left: 21.6%;
+  font-size: 500%;
 }
 
 .atk_num{
-  position: absolute;
-  top: 87.7%;
-  left: 80%;
-  font-size: 380%;
+  position: relative;
+  top: -26vmin;
+  left: 74.5%;
+  font-size: 500%;
 }

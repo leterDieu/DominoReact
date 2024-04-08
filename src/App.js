@@ -11,7 +11,7 @@ import {Boris} from "./gameLogic/card.mjs";
 const deck = basic_deck
 
 
-const gameData = {turn: 0, stage: 0, playerMana: 5, botMana: 5, playerManaPerTurn: 2, botManaPerTurn: 2, hasTakenCard: false};
+const gameData = {turn: 0, stage: 0, playerMana: 12321321, botMana: 213123231, playerManaPerTurn: 2, botManaPerTurn: 2, hasTakenCard: false};
 // stages:
 // -1 - debug,
 // 0 - mana increase, cards drawing
@@ -73,9 +73,7 @@ function App() {
     }
 
     const handleTableClickOwn = (card) => {
-        if (gameData.stage === 4 || gameData.stage === -1) {
-            setTableChoice1(card)
-        }
+        setTableChoice1(card)
     }
 
     const handleTableClickOther = (card) => {
@@ -118,6 +116,22 @@ function App() {
         )
     }
 
+    const Field = (props) => {
+        const name = props.name
+        const func = props.func
+        const container = props.container
+
+        return (
+            <div>
+                <p>{name}:</p>
+                <div className={"stdBlock"}>
+                    {container.map(card => (
+                        <UltimateCard key={card.id} card={card} func={func}/>))}
+                </div>
+            </div>
+        )
+    }
+
     return (<div className="App">
 
         <div>
@@ -128,34 +142,21 @@ function App() {
             <Mana mana={gameData.playerMana}/>
         </div>
         <div className="allCards">
-
-            <p>Enemy's hand:</p>
-
-            <div className="enemy-hand">
-                {enemyHandCards.map(card => (
-                    <UltimateCard key={card.id} card={card} func={handleHandBot}/>))}
+            <div>
+                <Field name={"Enemy's hand"} func={handleHandBot} container={enemyHandCards}/>
             </div>
 
-            <p>Enemy's table:</p>
-
-            <div className="enemy-table">
-                {enemyTableCards.map(card => (
-                    <UltimateCard key={card.id} card={card} func={handleTableClickOther}/>))}
+            <div>
+                <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards}/>
             </div>
 
-            <p>Player's table:</p>
-
-            <div className="player-table">
-                {playerTableCards.map(card => (
-                    <UltimateCard key={card.id} card={card} func={handleTableClickOwn}/>))}
+            <div>
+                <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards}/>
             </div>
 
-            <p>Player's hand:</p>
-
-            <div className="player-hand">
-                {playerHandCards.map(card => (<UltimateCard key={card.id} card={card} func={handleHandClick}/>))}
+            <div>
+                <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards}/>
             </div>
-
         </div>
 
     </div>);
