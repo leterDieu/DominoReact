@@ -9,19 +9,24 @@ const Header = (props) => {
     const playerTableSetter = props.data.setters.player.table
     const enemyTableSetter = props.data.setters.enemy.table
     const stage = props.stage
+    const setStage = props.setStage
+    const turn = props.turn
+    const setTurn = props.setTurn
+    const hasTakenCard = props.hasTakenCard
 
-    const resetFunc = (playerHandSetter, enemyHandSetter, playerTableSetter, enemyTableSetter) => {
+    const resetFunc = (playerHandSetter, enemyHandSetter, playerTableSetter, enemyTableSetter, setTurn, setStage) => {
         playerHandSetter([])
         playerTableSetter([])
         enemyTableSetter([])
         enemyHandSetter([])
+        setStage(0)
+        setTurn(0)
 
         // set stage to zero, set gameData to initial
     }
 
-    const drawCards = (deck, handGetter, handSetter) => { // ограничение на ману и количество карт
-        if (stage === 0 || stage === -1) {
-
+    const drawCards = (deck, handGetter, handSetter, hasTakenCard) => { // ограничение на ману и количество карт
+        if (!hasTakenCard) {
             let copied_deck = [...deck]
             let copied_hand = [...handGetter]
 
@@ -30,21 +35,25 @@ const Header = (props) => {
                 return 1
             }
 
-            copied_hand.push(new copied_deck[randint(copied_deck.length)]())
+            let newCard = new copied_deck[randint(copied_deck.length)]()
+            copied_hand.push(newCard)
             handSetter(copied_hand)
             return 0
+        } else {
+            alert("You have already took card from deck this turn.")
+            return 1
         }
     }
 
     return (
         <header className="game-header">
             <button
-                onClick={() => resetFunc(playerHandSetter, enemyHandSetter, playerTableSetter, enemyTableSetter)}>Reset
+                onClick={() => resetFunc(playerHandSetter, enemyHandSetter, playerTableSetter, enemyTableSetter, setTurn, setStage)}>Reset
             </button>
 
-            <button onClick={() => drawCards(deck, playerHandGetter, playerHandSetter)}>DECK -> PLAYER HAND</button>
+            <button onClick={() => drawCards(deck, playerHandGetter, playerHandSetter, hasTakenCard)}>DECK -> PLAYER HAND</button>
 
-            <button onClick={() => drawCards(deck, enemyHandGetter, enemyHandSetter)}>DECK -> ENEMY HAND</button>
+            <button onClick={() => drawCards(deck, enemyHandGetter, enemyHandSetter, false)}>DECK -> ENEMY HAND</button>
         </header>)
 }
 
