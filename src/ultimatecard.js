@@ -9,10 +9,8 @@ export default function UltimateCard(props) {
 
     return (
         <div>
-            <div>
-                <img className="card" src={require(`${card.src}`)} alt="card front" onClick={handleClick}/>
-                <div className="hp_num">{card.hp}</div>
-                <div className="atk_num">{card.atk}</div>
-            </div>
+            <img className="cardBlock" src={require(`${card.src}`)} alt="card front" onClick={handleClick}/>
+            <div className="hp_num">{card.hp}</div>
+            <div className="atk_num">{card.atk}</div>
         </div>)
 }
