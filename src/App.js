@@ -3,14 +3,15 @@ import {useState} from "react";
 import Header from "./Header.js";
 import {basic_deck} from "./gameLogic/deckcreator.mjs";
 import UltimateCard from "./ultimatecard";
-import {attack} from "./gameLogic/gamelogic.mjs";
+import {attack, randint} from "./gameLogic/gamelogic.mjs";
+import {Boris} from "./gameLogic/card.mjs";
 
 
 // const cardImages = [{"src": "./img/example-card-1.png"}, {"src": "./img/example-card-2.png"}, {"src": "./img/example-card-3.png"}, {"src": "./img/example-card-4.png"}, {"src": "./img/example-card-5.png"}, {"src": "./img/example-card-6.png"}, {"src": "./img/example-card-7.png"}, {"src": "./img/example-card-8.png"}, {"src": "./img/example-card-9.png"}, {"src": "./img/example-card-10.png"}, {"src": "./img/example-card-11.png"}, {"src": "./img/example-card-12.png"},]
 const deck = basic_deck
 
 
-const gameData = {turn: 0, stage: -1, playerMana: 5, botMana: 5, playerManaPerTurn: 2, botManaPerTurn: 2};
+const gameData = {turn: 0, stage: 0, playerMana: 5, botMana: 5, playerManaPerTurn: 2, botManaPerTurn: 2, hasTakenCard: false};
 // stages:
 // -1 - debug,
 // 0 - mana increase, cards drawing
@@ -32,6 +33,7 @@ function App() {
     const [tableChoice1, setTableChoice1] = useState(null)
 
     const [stage, setStage] = useState(gameData.stage)
+    const [turnConst, setTurnConst] = useState(gameData.turn)
 
     const allData = {
         decks: deckedCards, setters: {
@@ -46,27 +48,28 @@ function App() {
 
 
     const handleHandClick = (card) => {
-        if (gameData.stage === 1 || gameData.stage === -1) {
-            let manage_HandCards = [...playerHandCards]
-            let oldTable = [...playerTableCards]
-
-            oldTable.push(card)
-            manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
-            setPlayerHandCards(manage_HandCards)
-            setPlayerTableCards(oldTable)
+        if (gameData.playerMana < card.cst) {
+            alert("You have not enough mana to get this card on table")
+            return
         }
+        let manage_HandCards = [...playerHandCards]
+        let oldTable = [...playerTableCards]
+
+        oldTable.push(card)
+        manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
+        setPlayerHandCards(manage_HandCards)
+        setPlayerTableCards(oldTable)
+        gameData.playerMana -= card.cst
     }
 
     const handleHandBot = (card) => {
-        if (gameData.stage === 2 || gameData.stage === -1) {
-            let manage_HandCards = [...enemyHandCards]
-            let oldTable = [...enemyTableCards]
+        let manage_HandCards = [...enemyHandCards]
+        let oldTable = [...enemyTableCards]
 
-            oldTable.push(card)
-            manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
-            setEnemyHandCards(manage_HandCards)
-            setEnemyTableCards(oldTable)
-        }
+        oldTable.push(card)
+        manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
+        setEnemyHandCards(manage_HandCards)
+        setEnemyTableCards(oldTable)
     }
 
     const handleTableClickOwn = (card) => {
@@ -76,53 +79,54 @@ function App() {
     }
 
     const handleTableClickOther = (card) => {
-        if (gameData.stage === 4 || gameData.stage === -1) {
-            if (tableChoice1 !== null) {
-                console.log(tableChoice1)
-                console.log(card)
+        if (tableChoice1 !== null) {
+            console.log(tableChoice1)
+            console.log(card)
 
-                attack(tableChoice1, card, allData.getters.player.table, allData.getters.enemy.table)
-            }
+            attack(tableChoice1, card, allData.getters.player.table, allData.getters.enemy.table, allData.setters.enemy.table)
         }
     }
 
-    const plusStage = () => {
-        if (gameData.stage === 0) {
-            // draw cards
-            gameData.stage++
+    const TurnThing = (props) => {
+        const turn = props.turn
+        const stageLocal = props.stage
+        const setStageLocal = props.setStage
+
+        const generateForOfthem = (stageLocalFunc, setStageLocalFunc) => {
+            let std1 = [new Boris(), new Boris(), new Boris(), new Boris()]
+            let std2 = [new Boris(), new Boris(), new Boris(), new Boris()]
+            setPlayerHandCards(std1)
+            setEnemyHandCards(std2)
+            setStageLocalFunc(stageLocalFunc += 1)
+            // Этот код нуждается в полной переработке. ПОЛНОЙ.
         }
-        else if (gameData.stage === 1) {
-            //bot cards picking
-            gameData.stage++
-        } else if (gameData.stage === 2) {
-            //spells
-            gameData.stage++
-        } else if (gameData.stage === 4) {
-            //bot attack
-            gameData.stage++
-        } else if (gameData.stage === 5) {
-            gameData.playerMana += gameData.playerManaPerTurn
-            gameData.botMana += gameData.botManaPerTurn
-            gameData.stage = 0
-            gameData.turn++
+        if (turn === 0 && stageLocal === 0) {
+            return (
+                <button onClick={() => generateForOfthem(stageLocal, setStageLocal)}>start game</button>
+            )
         } else {
-            gameData.stage++
+            return (
+                <p>turn: {turn}</p>
+            )
         }
-        setStage(gameData.stage)
     }
 
-    const debugStage = () => {
-        gameData.stage = -1
-        setStage(gameData.stage)
+    const Mana = (props) => {
+        const mana = props.mana
+        return (
+            <p>mana: {mana}</p>
+        )
     }
-    
 
     return (<div className="App">
-        <button onClick={plusStage}>stage++</button>
-        <button onClick={debugStage}>debug stage</button>
-        <p>{stage}</p>
 
-        <Header data={allData} stage={gameData.stage}/>
+        <div>
+            <Header data={allData} stage={stage} setStage={setStage} turn={turnConst} setTurn={setTurnConst} hasTakenCard={gameData.hasTakenCard}/>
+
+            <TurnThing turn={turnConst} stage={stage} setStage={setStage}/>
+
+            <Mana mana={gameData.playerMana}/>
+        </div>
         <div className="allCards">
 
             <p>Enemy's hand:</p>
