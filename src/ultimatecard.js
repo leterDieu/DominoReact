@@ -10,7 +10,7 @@ export default function UltimateCard(props) {
     return (
 
         <div>
-        <div>
+        <div className={'card_div'}>
             <img className="card"
                  src={require(`${card.src}`)}
                  alt="card front"

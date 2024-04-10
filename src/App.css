@@ -2,8 +2,8 @@
   scale: 0.2;
 
   /*change this*/
-  margin-top: -500px;
-  margin-left: -300px;
+  margin-top: -550px;
+  margin-left: -900px;
 
 
   display: grid;
@@ -51,20 +51,25 @@
 }
 
 .card{
-  width: 150vmin;
-  height: 157vmin;
+  width: 135vmin;
+  height: 175vmin;
+
 }
 
 .hp_num{
-  position: absolute;
-  top: 87.7%;
-  left: 13.3%;
-  font-size: 380%;
+  position: relative;
+  top: -19vmin;
+  left: 21.6%;
+  font-size: 500%;
+
 }
 
 .atk_num{
-  position: absolute;
-  top: 87.7%;
-  left: 43%;
-  font-size: 380%;
+  position: relative;
+  top: -26vmin;
+  left: 74.5%;
+  font-size: 500%;
+
 }
+.card_div {transition: 0.2s}
+.card_div:hover {scale: 2;}
