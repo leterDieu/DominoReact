@@ -99,8 +99,9 @@ function App() {
         const container = props.container
 
         return (
-            <div className="cardContainer">
-                <p>{name}:</p>
+            <div>
+                {/*<p>{name}:</p>*/}
+
                 <div className={"stdBlock"}>
                     {container.map(card => (
                         <UltimateCard key={card.id} card={card} func={func}/>))}
