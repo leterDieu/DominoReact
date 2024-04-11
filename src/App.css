@@ -28,3 +28,6 @@
   left: 83%;
   font-size: 500%;
 }
+
+.card{transition: 0.2s}
+.card:hover{scale: 180%}

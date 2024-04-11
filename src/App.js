@@ -209,7 +209,7 @@ function App() {
     }
 
     return (<div className="mainWindow">
-
+        <a href="Card_choose.html" className="btn">Изменить карты</a>
         <div className="headerWindow">
             <Header data={allData} stage={stage} setStage={setStage} turn={turnConst} setTurn={setTurnConst}
                     hasTakenCard={gameData.hasTakenCard}/>
@@ -224,20 +224,20 @@ function App() {
                 <Field name={"Enemy's hand"} func={blankFunc} container={enemyHandCards}/>
             </div>
 
-                <div className="enemyTable">
-                    <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards}/>
-                </div>
-
-                <div className="playerTable">
-                    <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards}/>
-                </div>
-
-                <div className="playerHand">
-                    <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards}/>
-                </div>
+            <div className="enemyTable">
+                <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards}/>
             </div>
 
-        </div>);
+            <div className="playerTable">
+                <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards}/>
+            </div>
+
+            <div className="playerHand">
+                <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards}/>
+            </div>
+        </div>
+
+    </div>);
 }
 
 export default App;
