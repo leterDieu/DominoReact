@@ -138,10 +138,6 @@ function App() {
         gameData.botMana += gameData.botManaPerTurn
     }
 
-    const applySpells = () => {
-        //
-    }
-
     // stages:
     // -1 - debug,
     // 0 - mana increase, cards drawing - stdMana++ ; drawCards => sys
