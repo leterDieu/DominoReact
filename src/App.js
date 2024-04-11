@@ -98,7 +98,7 @@ function App() {
         const container = props.container
 
         return (
-            <div>
+            <div className="cardContainer">
                 <p>{name}:</p>
                 <div className={"stdBlock"}>
                     {container.map(card => (
@@ -108,32 +108,32 @@ function App() {
         )
     }
 
-    return (<div>
+    return (
+        <div className="mainWindow">
+            <div className="headerWindow">
+                <Header data={allData} stage={stage} setStage={setStage} turn={turnConst} setTurn={setTurnConst} hasTakenCard={gameData.hasTakenCard}/>
 
-        <div>
-            <Header data={allData} stage={stage} setStage={setStage} turn={turnConst} setTurn={setTurnConst} hasTakenCard={gameData.hasTakenCard}/>
+                <Mana mana={gameData.playerMana}/>
+            </div>
+            <div className="bodyWindow">
+                <div className="enemyHand">
+                    <Field name={"Enemy's hand"} func={handleHandBot} container={enemyHandCards}/>
+                </div>
 
-            <Mana mana={gameData.playerMana}/>
-        </div>
-        <div>
-            <div>
-                <Field name={"Enemy's hand"} func={handleHandBot} container={enemyHandCards}/>
+                <div className="enemyTable">
+                    <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards}/>
+                </div>
+
+                <div className="playerTable">
+                    <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards}/>
+                </div>
+
+                <div className="playerHand">
+                    <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards}/>
+                </div>
             </div>
 
-            <div>
-                <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards}/>
-            </div>
-
-            <div>
-                <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards}/>
-            </div>
-
-            <div>
-                <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards}/>
-            </div>
-        </div>
-
-    </div>);
+        </div>);
 }
 
 export default App;
