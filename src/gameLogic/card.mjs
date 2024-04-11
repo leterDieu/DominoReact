@@ -30,7 +30,7 @@ class Boris extends Card {
         super("boris", 3, 2, 4, [], "./img/Boriska.webp");
     }
 
-    router(type, this_table=null, impacted_card_id=null, impacted_table=null) {
+    router(type, this_table = null, impacted_card_id = null, impacted_table = null) {
         if (type === "basic") {
 
         } else if (type === "atk") {
@@ -41,10 +41,10 @@ class Boris extends Card {
     }
 
     borisExcellent(this_table) {
-        if (this.checkConditions("boris the excellent")){
+        if (this.checkConditions("boris the excellent")) {
             return;
         }
-        for (let i = 0; i < this_table.length; i++){
+        for (let i = 0; i < this_table.length; i++) {
             if (this_table[i].name === 'nkvadrat') {
                 let chance = randint(100)
                 if (chance < 70) {
@@ -60,4 +60,84 @@ class Boris extends Card {
     }
 }
 
-export { Boris }
+class Natalya extends Card {
+    constructor() {
+        super("natalya", 4, 1, 6, [], "./img/-.webp");
+    }
+
+    router(type, this_table = null, impacted_card_id = null, impacted_table = null) {
+        if (type === "basic") {
+
+        } else if (type === "atk") {
+            this.textKnowledge(impacted_card_id)
+        } else {
+
+        }
+    }
+
+    textKnowledge(impacted_card) {
+        if (impacted_card.checkConditions("textKnowledge")) {
+            return;
+        }
+        impacted_card.hp = 0
+    }
+}
+
+class Kirill extends Card {
+    constructor() {
+        super("kirill", 8, 1, 3, [], "./img/-.webp");
+        this.clap_chance_adder = 0
+    }
+
+    router(type, this_table = null, impacted_card_id = null, impacted_table = null) {
+        if (type === "basic") {
+
+        } else if (type === "atk") {
+            this.brotherClap(impacted_card_id)
+        } else {
+
+        }
+    }
+
+    brotherClap(impacted_card) {
+        if (Math.random() <= (0.2 + this.clap_chance_adder)) {
+            impacted_card.conditions.push("stunned")
+            this.clap_chance_adder = 0
+        } else {
+            this.clap_chance_adder += 0.15
+        }
+    }
+}
+
+class Anikeev extends Card {
+    constructor() {
+        super("anikeev", 6, 2, 6, [], "./img/-.webp");
+    }
+
+    router(type, this_table = null, impacted_card_id = null, impacted_table = null) {
+        if (type === "basic") {
+
+        } else if (type === "atk") {
+            this.eightHundred(impacted_card_id)
+        } else {
+
+        }
+    }
+
+    eightHundred(impacted_card) {
+        if (Math.random() <= 0.25) {
+            impacted_card.hp -= this.atk
+        }
+    }
+
+    getDamage(value) {
+        if (this.hp <= value && Math.random() <= 0.5) {
+            //
+        } else {
+            this.hp -= value
+        }
+    }
+}
+
+
+export {Boris, Natalya, Kirill, Anikeev}
