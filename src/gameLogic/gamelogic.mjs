@@ -16,19 +16,13 @@ function attack(attacker, defender, attackerTable, defenderTable, defenderTableS
     }
 }
 
-function basicSpells(table) {
-    if (table.length === 0) {
-        return
-    }
+function basicSpells(table, enemyTable=null) {
     for (let i = 0; i < table.length; i++) {
         table[i].router("basic", [table, null, null])
     }
 }
 
 function allowAttacks(table) {
-    if (table.length === 0) {
-        return
-    }
     for (let i = 0; i < table.length; i++) {
         table[i].canAttackThisTurn = true
     }

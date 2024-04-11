@@ -1,14 +1,15 @@
 .stdBlock {
-  scale: 0.2;
+  scale: 0.1;
 
-  /*change this*/
   margin-top: -200px;
   margin-left: -50px;
-
+  height: 400px;
+  width: 150px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
 }
+
 
 .cardBlock{
   width: 124vmin;
