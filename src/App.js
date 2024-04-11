@@ -85,30 +85,6 @@ function App() {
         }
     }
 
-    const TurnThing = (props) => {
-        const turn = props.turn
-        const stageLocal = props.stage
-        const setStageLocal = props.setStage
-
-        const generateForOfthem = (stageLocalFunc, setStageLocalFunc) => {
-            let std1 = [new Boris(), new Boris(), new Boris(), new Boris()]
-            let std2 = [new Boris(), new Boris(), new Boris(), new Boris()]
-            setPlayerHandCards(std1)
-            setEnemyHandCards(std2)
-            setStageLocalFunc(stageLocalFunc += 1)
-            // Этот код нуждается в полной переработке. ПОЛНОЙ.
-        }
-        if (turn === 0 && stageLocal === 0) {
-            return (
-                <button onClick={() => generateForOfthem(stageLocal, setStageLocal)}>start game</button>
-            )
-        } else {
-            return (
-                <p>turn: {turn}</p>
-            )
-        }
-    }
-
     const Mana = (props) => {
         const mana = props.mana
         return (
@@ -136,8 +112,6 @@ function App() {
 
         <div>
             <Header data={allData} stage={stage} setStage={setStage} turn={turnConst} setTurn={setTurnConst} hasTakenCard={gameData.hasTakenCard}/>
-
-            <TurnThing turn={turnConst} stage={stage} setStage={setStage}/>
 
             <Mana mana={gameData.playerMana}/>
         </div>
