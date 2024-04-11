@@ -99,7 +99,7 @@ function App() {
 
         return (
             <div>
-                <p>{name}:</p>
+                {/*<p>{name}:</p>*/}
                 <div className={"stdBlock"}>
                     {container.map(card => (
                         <UltimateCard key={card.id} card={card} func={func}/>))}
