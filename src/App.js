@@ -108,14 +108,14 @@ function App() {
         )
     }
 
-    return (<div className="App">
+    return (<div>
 
         <div>
             <Header data={allData} stage={stage} setStage={setStage} turn={turnConst} setTurn={setTurnConst} hasTakenCard={gameData.hasTakenCard}/>
 
             <Mana mana={gameData.playerMana}/>
         </div>
-        <div className="allCards">
+        <div>
             <div>
                 <Field name={"Enemy's hand"} func={handleHandBot} container={enemyHandCards}/>
             </div>
