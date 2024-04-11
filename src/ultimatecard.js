@@ -7,8 +7,12 @@ export default function UltimateCard(props) {
     //     const cardSource = "./img/card_back.png"
     // } else {
     let cardSource = card.src
+    let cardHp = card.hp
+    let cardAtk = card.atk
     if (secret) {
         cardSource = "./img/card-cover.png"
+        cardHp = ""
+        cardAtk = ""
     }
 
 
@@ -19,7 +23,7 @@ export default function UltimateCard(props) {
     return (
         <div className="card">
             <img className="cardBlock" src={require(`${cardSource}`)} alt="card front" onClick={handleClick}/>
-            <div className="hp_num">{card.hp}</div>
-            <div className="atk_num">{card.atk}</div>
+            <div className="hp_num">{cardHp}</div>
+            <div className="atk_num">{cardAtk}</div>
         </div>)
 }

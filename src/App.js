@@ -13,13 +13,12 @@ const deck = basic_deck
 
 
 const gameData = {
-    turn: 0,
+    turn: 1,
     stage: -1,
     playerMana: 5,
     botMana: 5,
     playerManaPerTurn: 2,
     botManaPerTurn: 2,
-    hasTakenCard: false,
     playerHp: 10,
     botHp: 10,
     winner: "none"
@@ -37,7 +36,6 @@ function App() {
     const [tableChoice1, setTableChoice1] = useState(null)
 
     const [stage, setStage] = useState(gameData.stage)
-    const [turnConst, setTurnConst] = useState(gameData.turn)
 
     const allData = {
         decks: deckedCards, setters: {
@@ -143,12 +141,15 @@ function App() {
         }
 
         let card_index = randint(manage_HandCards.length)
-
-        manage_TableCards.push(manage_HandCards[card_index])
+        let card = manage_HandCards[card_index]
+        if (gameData.botMana < card.cst) {
+            return;
+        }
+        manage_TableCards.push(card)
         manage_HandCards.splice(card_index)
         setEnemyHandCards(manage_HandCards)
         setEnemyTableCards(manage_TableCards)
-        console.log(enemyHandCards, enemyTableCards)
+        gameData.botMana -= card.cst
     }
 
     const manaIncrease = () => {
@@ -287,7 +288,7 @@ function App() {
                     <Mana mana={gameData.playerMana}/>
 
                     <button onClick={readyButton}>Ready</button>
-                    <p>you can now: {answer}. Press ready button to go to the next phase.</p>
+                    <p>you can now: {answer}. Press ready button to go to the next phase. current turn: {gameData.turn}</p>
 
                 </div>
 

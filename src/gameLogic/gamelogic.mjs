@@ -1,7 +1,7 @@
 function attack(attacker, defender, attackerTable, defenderTable, defenderTableSetter) { // 0 - success; 1 - error
     if (attacker.canAttackThisTurn === true) {
-        attacker.router("atk", [attackerTable, defender, defenderTable])
-        defender.router("def", [defenderTable, attacker, attackerTable])
+        attacker.router("atk", attackerTable, defender, defenderTable)
+        defender.router("def", defenderTable, attacker, attackerTable)
 
         defender.getDamage(attacker.atk)
 
@@ -10,7 +10,6 @@ function attack(attacker, defender, attackerTable, defenderTable, defenderTableS
         for (let i = 0; i < toRemoveAttacked.length; i++) {
             updatedTable.splice(updatedTable.indexOf(toRemoveAttacked[i]), 1)
         }
-        console.log(updatedTable)
         defenderTableSetter(updatedTable)
         attacker.canAttackThisTurn = false
     }

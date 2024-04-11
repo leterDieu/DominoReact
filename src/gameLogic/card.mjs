@@ -65,7 +65,7 @@ class Boris extends Card {
 
 class Natalya extends Card {
     constructor() {
-        super("natalya", 4, 1, 6, [], "./img/-.webp");
+        super("natalya", 4, 1, 6, [], "./img/Natalia.png");
     }
 
     router(type, this_table = null, impacted_card_id = null, impacted_table = null) {
@@ -79,6 +79,7 @@ class Natalya extends Card {
     }
 
     textKnowledge(impacted_card) {
+        console.log(impacted_card)
         if (impacted_card.checkConditions("textKnowledge")) {
             return;
         }
@@ -88,7 +89,7 @@ class Natalya extends Card {
 
 class Kirill extends Card {
     constructor() {
-        super("kirill", 8, 1, 3, [], "./img/-.webp");
+        super("kirill", 8, 1, 3, [], "./img/Kirill.png");
         this.clap_chance_adder = 0
     }
 
@@ -114,7 +115,7 @@ class Kirill extends Card {
 
 class Anikeev extends Card {
     constructor() {
-        super("anikeev", 6, 2, 6, [], "./img/-.webp");
+        super("anikeev", 6, 2, 6, [], "./img/Anikeev.png");
     }
 
     router(type, this_table = null, impacted_card_id = null, impacted_table = null) {

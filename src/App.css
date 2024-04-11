@@ -16,6 +16,7 @@
 }
 
 .hp_num{
+  color: black;
   position: relative;
   top: -13vmin;
   left: 14%;
@@ -23,6 +24,7 @@
 }
 
 .atk_num{
+  color: black;
   position: relative;
   top: -20vmin;
   left: 83%;
@@ -43,8 +45,4 @@
 
 .bigkostyl {
   font-size: 500%;
-}
-
-.body {
-  color: white;
 }
