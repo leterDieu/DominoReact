@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Heartstone</title>
+    <link rel="stylesheet" href="card_choose.css">
+</head>
+<body>
+
+
+
+<li>
+    <input type="checkbox" id="myCheckbox1" />
+    <label for="myCheckbox1"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox2" />
+    <label for="myCheckbox2"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox3" />
+    <label for="myCheckbox3"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox4" />
+    <label for="myCheckbox4"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox5" />
+    <label for="myCheckbox5"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox6" />
+    <label for="myCheckbox6"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox7" />
+    <label for="myCheckbox7"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox8" />
+    <label for="myCheckbox8"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox9" />
+    <label for="myCheckbox9"><img src="Boris_mk2.png" /></label>
+</li>
+<li>
+    <input type="checkbox" id="myCheckbox10" />
+    <label for="myCheckbox10"><img src="Boriska.webp" /></label>
+</li>
+
+<div class="main-container">
+
+    <a onclick="Save_deck" class="floating-button" id="button1">Сохранить</a>
+    <a href="http://localhost:3001" class="floating-button" id="button2">Назад</a>
+
+
+</div>
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let limit = 3; // Установить лимит карт//
+
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            let checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            if (checkedCheckboxes.length > limit) {
+                this.checked = false;
+            }
+        });
+    });
+</script>
+</body>
+</html>
