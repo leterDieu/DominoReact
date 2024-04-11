@@ -5,6 +5,7 @@ import {basic_deck} from "./gameLogic/deckcreator.mjs";
 import UltimateCard from "./ultimatecard";
 import {attack, randint, allowAttacks, basicSpells} from "./gameLogic/gamelogic.mjs";
 import {Boris} from "./gameLogic/card.mjs";
+import background from "./img/wood.jpg";
 
 
 // const cardImages = [{"src": "./img/example-card-1.png"}, {"src": "./img/example-card-2.png"}, {"src": "./img/example-card-3.png"}, {"src": "./img/example-card-4.png"}, {"src": "./img/example-card-5.png"}, {"src": "./img/example-card-6.png"}, {"src": "./img/example-card-7.png"}, {"src": "./img/example-card-8.png"}, {"src": "./img/example-card-9.png"}, {"src": "./img/example-card-10.png"}, {"src": "./img/example-card-11.png"}, {"src": "./img/example-card-12.png"},]
@@ -279,7 +280,7 @@ function App() {
         )
     } else {
         return (
-            <div className="mainWindow">
+            <div className="mainWindow" style={{ backgroundImage: `url(${background})`, color: 'white'}}>
 
                 <div className="headerWindow">
 
@@ -301,6 +302,10 @@ function App() {
 
                     <div className="enemyTable">
                         <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards} secret={false}/>
+                    </div>
+
+                    <div>
+                        <hr/>
                     </div>
 
                     <div className="playerTable">
