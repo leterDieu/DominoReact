@@ -42,4 +42,4 @@ function randint(max) {
     return Math.floor(Math.random() * max)
 }
 
-export { attack, basicSpells, checkHealth, randint }
+export { attack, basicSpells, checkHealth, randint, allowAttacks }

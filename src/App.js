@@ -3,7 +3,7 @@ import {useState} from "react";
 import Header from "./Header.js";
 import {basic_deck} from "./gameLogic/deckcreator.mjs";
 import UltimateCard from "./ultimatecard";
-import {attack, basicSpells, randint} from "./gameLogic/gamelogic.mjs";
+import {attack, randint, allowAttacks, basicSpells} from "./gameLogic/gamelogic.mjs";
 import {Boris} from "./gameLogic/card.mjs";
 
 
@@ -13,14 +13,15 @@ const deck = basic_deck
 
 const gameData = {
     turn: 0,
-    stage: 0,
+    stage: -1,
     playerMana: 12321321,
     botMana: 213123231,
     playerManaPerTurn: 2,
     botManaPerTurn: 2,
     hasTakenCard: false,
     playerHp: 10,
-    botHp: 10
+    botHp: 10,
+    winner: "none"
 };
 
 function App() {
@@ -74,22 +75,27 @@ function App() {
 
     const handleTableClickOther = (card) => {
         if (tableChoice1 !== null) {
-            console.log(tableChoice1)
-            console.log(card)
-
-            attack(tableChoice1, card, allData.getters.player.table, allData.getters.enemy.table, allData.setters.enemy.table)
+            attack(tableChoice1, card, playerTableCards, enemyTableCards, setEnemyTableCards)
         }
     }
 
     const botAttack = () => {
-        let rng_card = enemyTableCards[randint(enemyTableCards.length)]
-        attack(tableChoice1, rng_card, allData.getters.enemy.table, allData.getters.player.table, allData.setters.player.table)
+        if (enemyTableCards.length === 0 || playerTableCards.length === 0) {
+
+        }
+        let rng_card_bot = enemyTableCards[randint(enemyTableCards.length)]
+        let rng_card_plr = playerTableCards[randint(playerTableCards.length)]
+        console.log(rng_card_bot, rng_card_plr)
+        attack(rng_card_bot, rng_card_plr, enemyTableCards, playerTableCards, setPlayerTableCards)
     }
 
     const Mana = (props) => {
         const mana = props.mana
         return (
-            <p>mana: {mana}</p>
+            <div>
+                <p>mana: {mana}</p>
+                <p>stage: {stage}</p>
+            </div>
         )
     }
 
@@ -99,9 +105,8 @@ function App() {
         const container = props.container
 
         return (
-            <div>
-                {/*<p>{name}:</p>*/}
-
+            <div className="cardContainer">
+                <p>{name}:</p>
                 <div className={"stdBlock"}>
                     {container.map(card => (
                         <UltimateCard key={card.id} card={card} func={func}/>))}
@@ -132,11 +137,16 @@ function App() {
         manage_HandCards.splice(card_index)
         setEnemyHandCards(manage_HandCards)
         setEnemyTableCards(manage_TableCards)
+        console.log(enemyHandCards, enemyTableCards)
     }
 
     const manaIncrease = () => {
         gameData.playerMana += gameData.playerManaPerTurn
         gameData.botMana += gameData.botManaPerTurn
+    }
+
+    const attackTable = (target) => {
+        //waiting to be written
     }
 
     // stages:
@@ -150,31 +160,29 @@ function App() {
 
 
     const stagePlus = () => {
-        // this block is separate of easier readability
-        if (gameData.stage === 5) {
-            gameData.stage = 0
-        } else {
-            gameData.stage++
-        }
-
-        setStage(gameData.stage)
-
+        allowAttacks(playerTableCards)
+        allowAttacks(enemyTableCards)
         if (gameData.stage === 0) {
             manaIncrease()
             drawCards(playerHandCards, setPlayerHandCards)
             drawCards(enemyHandCards, setEnemyHandCards)
+            gameData.stage += 1
+            setStage(gameData.stage)
             stagePlus()
         } else if (gameData.stage === 1) {
             // implemented
             // attention! no stagePlus required here, as it's written in the ready button
         } else if (gameData.stage === 2) {
             botPick()
+            gameData.stage += 1
+            setStage(gameData.stage)
             stagePlus()
         } else if (gameData.stage === 3) {
             basicSpells(playerTableCards)
-            checkWin()
             basicSpells(enemyTableCards)
             checkWin()
+            gameData.stage += 1
+            setStage(gameData.stage)
             stagePlus()
         } else if (gameData.stage === 4) {
             // implemented
@@ -183,6 +191,9 @@ function App() {
             checkWin()
             botAttack()
             checkWin()
+            gameData.stage = 0
+            setStage(gameData.stage)
+            gameData.turn += 1
             stagePlus()
         }
     }
@@ -200,41 +211,59 @@ function App() {
     }
 
     const readyButton = () => {
-        if (gameData.stage === 1 || gameData.stage === 4) {
+        if (stage === 1 || stage === 4) {
+            gameData.stage += 1
+            setStage(gameData.stage)
             stagePlus()
         }
     }
 
-    return (<div className="mainWindow">
-        <a href="Card_choose.html" className="btn">Изменить карты</a>
-        <div className="headerWindow">
-            <Header data={allData} stage={stage} setStage={setStage} turn={turnConst} setTurn={setTurnConst}
-                    hasTakenCard={gameData.hasTakenCard}/>
+    function startGame() {
+        gameData.stage = 0
+        setStage(gameData.stage)
+        stagePlus()
+    }
 
-            <Mana mana={gameData.playerMana}/>
-        </div>
 
-        <button onClick={readyButton}>Ready</button>
-
-        <div className="bodyWindow">
-            <div className="enemyHand">
-                <Field name={"Enemy's hand"} func={blankFunc} container={enemyHandCards}/>
+    if (stage === -1) {
+        return (
+            <div>
+                <button onClick={startGame}>DEFEAT THIS HERESY</button>
             </div>
+        )
+    } else if (gameData.winner === "player" || gameData.winner === "bot") {
 
-            <div className="enemyTable">
-                <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards}/>
-            </div>
+    } else {
+        return (
+            <div className="mainWindow">
 
-            <div className="playerTable">
-                <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards}/>
-            </div>
+                <div className="headerWindow">
 
-            <div className="playerHand">
-                <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards}/>
-            </div>
-        </div>
+                    <Mana mana={gameData.playerMana}/>
 
-    </div>);
+                    <button onClick={readyButton}>Ready</button>
+                </div>
+
+
+                <div className="bodyWindow">
+                    <div className="enemyHand">
+                        <Field name={"Enemy's hand"} func={blankFunc} container={enemyHandCards}/>
+                    </div>
+
+                    <div className="enemyTable">
+                        <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards}/>
+                    </div>
+
+                    <div className="playerTable">
+                        <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards}/>
+                    </div>
+
+                    <div className="playerHand">
+                        <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards}/>
+                    </div>
+                </div>
+            </div>);
+    }
 }
 
 export default App;
