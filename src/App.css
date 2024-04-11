@@ -29,6 +29,10 @@
   font-size: 500%;
 }
 
+/*.mainWindow {*/
+/*  background-image: url("./img/Boris_mk2.png");*/
+/*}*/
+
 .rightBlock {
   position: absolute;
   right: 15vmin;
