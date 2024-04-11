@@ -16,7 +16,7 @@ function attack(attacker, defender, attackerTable, defenderTable, defenderTableS
     }
 }
 
-function basicSpells(table) {
+function basicSpells(table, enemyTable=null) {
     for (let i = 0; i < table.length; i++) {
         table[i].router("basic", [table, null, null])
     }
@@ -42,4 +42,5 @@ function randint(max) {
     return Math.floor(Math.random() * max)
 }
 
-export { attack, basicSpells, checkHealth, randint }
+
+export { attack, basicSpells, checkHealth, randint, allowAttacks }
