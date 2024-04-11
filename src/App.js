@@ -3,7 +3,7 @@ import {useState} from "react";
 import Header from "./Header.js";
 import {basic_deck} from "./gameLogic/deckcreator.mjs";
 import UltimateCard from "./ultimatecard";
-import {attack, randint} from "./gameLogic/gamelogic.mjs";
+import {attack, basicSpells, randint} from "./gameLogic/gamelogic.mjs";
 import {Boris} from "./gameLogic/card.mjs";
 
 
@@ -174,7 +174,9 @@ function App() {
             botPick()
             stagePlus()
         } else if (gameData.stage === 3) {
-            applySpells()
+            basicSpells(playerTableCards)
+            checkWin()
+            basicSpells(enemyTableCards)
             checkWin()
             stagePlus()
         } else if (gameData.stage === 4) {
