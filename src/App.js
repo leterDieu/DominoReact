@@ -85,7 +85,6 @@ function App() {
         }
         let rng_card_bot = enemyTableCards[randint(enemyTableCards.length)]
         let rng_card_plr = playerTableCards[randint(playerTableCards.length)]
-        console.log(rng_card_bot, rng_card_plr)
         attack(rng_card_bot, rng_card_plr, enemyTableCards, playerTableCards, setPlayerTableCards)
     }
 
@@ -130,6 +129,9 @@ function App() {
     const botPick = () => {
         let manage_HandCards = [...enemyHandCards]
         let manage_TableCards = [...enemyTableCards]
+        if(manage_TableCards.length === 10) {
+            return
+        }
 
         let card_index = randint(manage_HandCards.length)
 
