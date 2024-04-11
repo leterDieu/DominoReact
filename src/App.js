@@ -14,8 +14,8 @@ const deck = basic_deck
 const gameData = {
     turn: 0,
     stage: -1,
-    playerMana: 12321321,
-    botMana: 213123231,
+    playerMana: 5,
+    botMana: 5,
     playerManaPerTurn: 2,
     botManaPerTurn: 2,
     hasTakenCard: false,
@@ -58,6 +58,10 @@ function App() {
             }
             let manage_HandCards = [...playerHandCards]
             let oldTable = [...playerTableCards]
+            if (playerTableCards.length === 10) {
+                alert("You have reached card maximum in table")
+                return;
+            }
 
             oldTable.push(card)
             manage_HandCards.splice(manage_HandCards.indexOf(card), 1)
@@ -105,13 +109,14 @@ function App() {
         const name = props.name
         const func = props.func
         const container = props.container
+        const secret = props.secret
 
         return (
             <div className="cardContainer">
                 <p>{name}:</p>
                 <div className={"stdBlock"}>
                     {container.map(card => (
-                        <UltimateCard key={card.id} card={card} func={func}/>))}
+                        <UltimateCard key={card.id} card={card} func={func} secret={secret}/>))}
                 </div>
             </div>
         )
@@ -291,19 +296,19 @@ function App() {
                         <Base />
                     </div>
                     <div className="enemyHand">
-                        <Field name={"Enemy's hand"} func={blankFunc} container={enemyHandCards}/>
+                        <Field name={"Enemy's hand"} func={blankFunc} container={enemyHandCards} secret={true}/>
                     </div>
 
                     <div className="enemyTable">
-                        <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards}/>
+                        <Field name={"Enemy's table"} func={handleTableClickOther} container={enemyTableCards} secret={false}/>
                     </div>
 
                     <div className="playerTable">
-                        <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards}/>
+                        <Field name={"Player's table"} func={handleTableClickOwn} container={playerTableCards} secret={false}/>
                     </div>
 
                     <div className="playerHand">
-                        <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards}/>
+                        <Field name={"Player's hand"} func={handleHandClick} container={playerHandCards} secret={false}/>
                     </div>
                 </div>
             </div>);
