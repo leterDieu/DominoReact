@@ -10,7 +10,6 @@
   grid-gap: 20px;
 }
 
-
 .cardBlock{
   width: 124vmin;
   height: 160vmin;
@@ -27,5 +26,17 @@
   position: relative;
   top: -20vmin;
   left: 83%;
+  font-size: 500%;
+}
+
+.rightBlock {
+  position: absolute;
+  right: 15vmin;
+  scale: 0.2;
+  height: 20px;
+  width: 20px;
+}
+
+.bigkostyl {
   font-size: 500%;
 }

@@ -80,20 +80,23 @@ function App() {
     }
 
     const botAttack = () => {
-        if (enemyTableCards.length === 0 || playerTableCards.length === 0) {
-
+        for (let botCardId = 0; botCardId < enemyTableCards.length; botCardId++){
+            let rng_card_bot = enemyTableCards[botCardId]
+            if (playerTableCards.length === 0) {
+                gameData.playerHp -= rng_card_bot.atk
+            } else {
+                let rng_card_plr = playerTableCards[randint(playerTableCards.length)]
+                attack(rng_card_bot, rng_card_plr, enemyTableCards, playerTableCards, setPlayerTableCards)
+            }
         }
-        let rng_card_bot = enemyTableCards[randint(enemyTableCards.length)]
-        let rng_card_plr = playerTableCards[randint(playerTableCards.length)]
-        attack(rng_card_bot, rng_card_plr, enemyTableCards, playerTableCards, setPlayerTableCards)
     }
 
     const Mana = (props) => {
         const mana = props.mana
         return (
             <div>
-                <p>mana: {mana}</p>
-                <p>stage: {stage}</p>
+                <p>your mana: {mana}; bot mana: {gameData.botMana}</p>
+                <p>your hp: {gameData.playerHp}; bot hp: {gameData.botHp}</p>
             </div>
         )
     }
@@ -203,8 +206,10 @@ function App() {
     const checkWin = () => {
         if (gameData.playerHp <= 0) {
             alert('You lost, loser!')
+            gameData.winner = "bot"
         } else if (gameData.botHp <= 0) {
             alert('You won, gg.')
+            gameData.winner = "player"
         }
     }
 
@@ -226,15 +231,47 @@ function App() {
         stagePlus()
     }
 
+    const dealDamageToBase = (card) => {
+        if (enemyTableCards.length === 0 && tableChoice1 !== null) {
+            gameData.botHp -= tableChoice1.atk
+            tableChoice1.canAttackThisTurn = false
+        }
+    }
+
+
+    const Base = () => {
+        const name = "bot base"
+
+        const handleClick = () => {
+            dealDamageToBase()
+        }
+
+        return (
+            <div className="rightBlock">
+                <p className="bigkostyl">{name}:</p>
+                <img src={require(`./img/lumbabalumba.png`)} onClick={handleClick}/>
+            </div>)
+    }
+
+    let answer;
+    if (stage === 1) {
+        answer = "pick cards from hand"
+    } else {
+        answer = "attack enemy cards"
+    }
 
     if (stage === -1) {
         return (
             <div>
-                <button onClick={startGame}>DEFEAT THIS HERESY</button>
+                <button onClick={startGame}>start game</button>
             </div>
         )
     } else if (gameData.winner === "player" || gameData.winner === "bot") {
-
+        return (
+            <div>
+                <p>{gameData.winner} won</p>
+            </div>
+        )
     } else {
         return (
             <div className="mainWindow">
@@ -244,10 +281,15 @@ function App() {
                     <Mana mana={gameData.playerMana}/>
 
                     <button onClick={readyButton}>Ready</button>
+                    <p>you can now: {answer}. Press ready button to go to the next phase.</p>
+
                 </div>
 
 
                 <div className="bodyWindow">
+                    <div>
+                        <Base />
+                    </div>
                     <div className="enemyHand">
                         <Field name={"Enemy's hand"} func={blankFunc} container={enemyHandCards}/>
                     </div>

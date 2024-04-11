@@ -13,6 +13,9 @@ class Card {
     }
 
     getDamage(value) {
+        if (this.checkConditions("defended")) {
+            return
+        }
         this.hp -= value
     }
 
