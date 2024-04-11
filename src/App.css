@@ -2,7 +2,7 @@
   scale: 0.1;
 
   margin-top: -200px;
-  margin-left: -50px;
+  margin-left: -20px;
   height: 400px;
   width: 150px;
   display: grid;
@@ -46,3 +46,6 @@
 .bigkostyl {
   font-size: 500%;
 }
+
+.card {transition: 0.2s}
+.card:hover {scale: 2;}
