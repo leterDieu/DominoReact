@@ -11,20 +11,20 @@
 }
 
 .cardBlock{
-  width: 150vmin;
-  height: 157vmin;
+  width: 124vmin;
+  height: 160vmin;
 }
 
 .hp_num{
   position: relative;
-  top: -19vmin;
-  left: 21.6%;
+  top: -13vmin;
+  left: 14%;
   font-size: 500%;
 }
 
 .atk_num{
   position: relative;
-  top: -26vmin;
-  left: 74.5%;
+  top: -20vmin;
+  left: 83%;
   font-size: 500%;
 }
